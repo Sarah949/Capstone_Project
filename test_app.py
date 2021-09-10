@@ -44,7 +44,7 @@ class CapstonTestCase(unittest.TestCase):
         # self.database_path = "postgresql://{}:{}@{}/{}".format(
         #                      'postgres', '1234', 'localhost:5432',
         #                       self.database_name)
-        self.database_path = 'postgres://kvwxtgpckchsfh:8a8b32b7bbef5a242adadadaff33ff19cdd3629fb8842795210efb0c4d0da2ee@ec2-44-195-16-34.compute-1.amazonaws.com:5432/d8nbles1ii1qdg'
+        self.database_path = 'postgresql://kvwxtgpckchsfh:8a8b32b7bbef5a242adadadaff33ff19cdd3629fb8842795210efb0c4d0da2ee@ec2-44-195-16-34.compute-1.amazonaws.com:5432/d8nbles1ii1qdg'
         setup_db(self.app, self.database_path)
 
         self.new_actor = {
