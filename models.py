@@ -6,12 +6,13 @@ from flask_sqlalchemy import SQLAlchemy
 # from db import db
 import json
 
-database_name = "actingagency"
-username = 'postgres'
-password = '1234'
-url = 'localhost:5432'
-database_path = "postgresql://{}:{}@{}/{}".format(
-    username, password, url, database_name)
+# database_name = "actingagency"
+# username = 'postgres'
+# password = '1234'
+# url = 'localhost:5432'
+# database_path = "postgresql://{}:{}@{}/{}".format(
+#     username, password, url, database_name)
+database_path = os.environ['DATABASE_URL']
 db = SQLAlchemy()
 
 

@@ -40,10 +40,11 @@ class CapstonTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app()
         self.client = self.app.test_client
-        self.database_name = "actingagency"
-        self.database_path = "postgresql://{}:{}@{}/{}".format(
-                             'postgres', '1234', 'localhost:5432',
-                              self.database_name)
+        # self.database_name = "actingagency"
+        # self.database_path = "postgresql://{}:{}@{}/{}".format(
+        #                      'postgres', '1234', 'localhost:5432',
+        #                       self.database_name)
+        self.database_path = os.environ['DATABASE_URL']
         setup_db(self.app, self.database_path)
 
         self.new_actor = {
