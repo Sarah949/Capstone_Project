@@ -14,7 +14,7 @@ load_dotenv()
 # url = 'localhost:5432'
 # database_path = "postgresql://{}:{}@{}/{}".format(
 #     username, password, url, database_name)
-database_path = os.environ['DATABASE_URL_MODIFIED']
+database_path = os.environ.get('DATABASE_URL_MODIFIED')
 db = SQLAlchemy()
 
 
