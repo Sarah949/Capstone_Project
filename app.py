@@ -6,7 +6,9 @@ from auth import AuthError, requires_auth
 from flask_cors import CORS
 import datetime
 import jwt
+from dotenv import load_dotenv
 
+load_dotenv()
 JWT_SECRET = os.environ.get('JWT_SECRET', 'abc123abc1234')
 
 
@@ -17,7 +19,7 @@ def create_app(test_config=None):
     CORS(app)
 
     # Initialize the datbase
-    #db_drop_and_create_all()
+    # db_drop_and_create_all()
 
     @app.after_request
     def after_request(response):
@@ -30,9 +32,10 @@ def create_app(test_config=None):
 
     @app.route('/')
     def get_greeting():
-        # excited = os.environ['EXCITED']
+        excited = os.environ['EXCITED']
+        print(os.environ.get('EXCITED'))
         greeting = "Hello"
-        # if excited == 'true': greeting = greeting + "!!!!!"
+        if excited == 'true': greeting = greeting + "!!!!!"
         return greeting
 
     '''
@@ -97,7 +100,7 @@ def create_app(test_config=None):
     @app.route("/movies/<int:id>", methods=["DELETE"])
     @requires_auth("delete:movies")
     def delete_movie(id):
-        
+
         moviequ = Movie.query.filter(Movie.id == id).one_or_none()
 
         if moviequ is None:
@@ -127,13 +130,13 @@ def create_app(test_config=None):
     @app.route("/actors/<int:id>", methods=["DELETE"])
     @requires_auth("delete:actors")
     def delete_actor(id):
-        
+
         actorqu = Actor.query.filter(Actor.id == id).one_or_none()
 
         if actorqu is None:
             abort(404)
 
-        try:  
+        try:
             actorqu.delete()
 
             return jsonify({
@@ -225,7 +228,6 @@ def create_app(test_config=None):
     @requires_auth('patch:actors')
     def replace_actor(id):
         body = request.get_json()
-        
 
         try:
             actor = Actor.query.filter(Actor.id == id).one_or_none()
@@ -263,7 +265,6 @@ def create_app(test_config=None):
     @requires_auth('patch:movies')
     def replace_movie(id):
         body = request.get_json()
-        
 
         try:
             movie = Movie.query.filter(Movie.id == id).one_or_none()

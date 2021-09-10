@@ -5,14 +5,13 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from app import create_app
 from models import setup_db, Actor, Movie
+from dotenv import load_dotenv
 
+load_dotenv()
 
-# casting_assistant_token = os.getenv('CASTING_ASSISTANT_JWT')
-# acting_director_token = os.getenv('ACTING_DIRECTOR_JWT')
-# executive_producer_token = os.getenv('EXECUTIVE_PRODUCER_JWT')
-casting_assistant_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImVFeG5vcV9NSExrZnRWU3F3QjNUUCJ9.eyJpc3MiOiJodHRwczovL3NhcmFoY2Fwc3RvbmUudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYxMzg2MTliNWNhZTQ2MDA2OTBhMjE2OSIsImF1ZCI6ImNhcHN0b24iLCJpYXQiOjE2MzEyNjg1OTEsImV4cCI6MTYzMTM1NDk5MSwiYXpwIjoieXFKZjZETGxMYTdpNk52c1pBOEFtckxpOWNYT0t2ZzgiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIl19.UWexoBCYFqWSW4iTnw02-GXpqw5y2z2tNHlc-IvEb1ZjJz4s6bnfCDSOPqRYnxTjB3lVyAte8HyuaHg4pvks6quM0LJo92vZbw6LFJoKng0HU_t2nXd9sYbAUYmktyAbmClo5PgdiOg8THpx91iL-3uIBWuqFzkrsqoonLTgYYZVZky3dwkML5rjPWqIQtVtNsvlsLHQSDQnNiF83kj102qWNKJe9plE7jTvxe3l3Z_BxSOsns4U7_Olrfu9iE5MwF6FuqZeh1CZkSuGg3cu61T5pTnCR84zUrDjM3VqIwxKfoXF36sqlvcvp-kANpR6zb9NVxTfLibTUndbc2g4KA'
-acting_director_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImVFeG5vcV9NSExrZnRWU3F3QjNUUCJ9.eyJpc3MiOiJodHRwczovL3NhcmFoY2Fwc3RvbmUudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYxMzg2MjA3MDA4NDI2MDA2OWRhMDlhOCIsImF1ZCI6ImNhcHN0b24iLCJpYXQiOjE2MzEyMTU1NTMsImV4cCI6MTYzMTMwMTk1MywiYXpwIjoieXFKZjZETGxMYTdpNk52c1pBOEFtckxpOWNYT0t2ZzgiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIl19.IVGhgwJRcmznw0zaOA-dFj0b_2ylyL-1uWpfWx43a_RBlAGm7zGS9VzLUOdgG20fKSpPAYC7EmrJdV1KSowZsYlZZPP16GxN7CT3scIDX6o9HAPuEodzhYcWTTH5jXFTMP2yOztNS2oFcqM_zRTxCEfWAavQkMcEokKaeexPKBdrQ2iDbx5XE7LRX6TS23M85MdzcqZKy2luPkuRPNhJicVminBQJzMt1MX_6eoeMK5eAe6f4FQvDc3U12s_AkXewFDvNuPVDaRdjobWpLM8gIuKxulfsRPR6Ghucc0LIRxLUmhK1LK_OIqvJM-RsPf4BmyD5cd64j96V9FjK6uL_w'
-executive_producer_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImVFeG5vcV9NSExrZnRWU3F3QjNUUCJ9.eyJpc3MiOiJodHRwczovL3NhcmFoY2Fwc3RvbmUudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYxMzg2MjRmOTUxODM5MDA3MDgyODdmMSIsImF1ZCI6ImNhcHN0b24iLCJpYXQiOjE2MzEyMTUzODYsImV4cCI6MTYzMTMwMTc4NiwiYXpwIjoieXFKZjZETGxMYTdpNk52c1pBOEFtckxpOWNYT0t2ZzgiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6bW92aWVzIiwiZ2V0OmFjdG9ycyIsImdldDptb3ZpZXMiLCJwYXRjaDphY3RvcnMiLCJwYXRjaDptb3ZpZXMiLCJwb3N0OmFjdG9ycyIsInBvc3Q6bW92aWVzIl19.vGY_jebG-nxLL3-c84WUyOJC_IU8JK9q6b4e1aH5i26fl9bfQCBmYlFHC1BlY-ytzA2jkij9qg3v1Zq6Ttluh5mp2S1AovdDASnHLWJ7CkH5fUJP2j-3T-HwfFokB-Z5lI3BdvFAfQkO_FkYIvTYOekHqM7u3b1HLTxoPmgwPMHNrYQZ9w8zZMTSWMxn2VMA39TvI6Z9GoqMCbhYfoZXyok3Gn6hh0HDSR-oIbLa1DZ-aRg1idouWznEYcDK5GikMvzE3k-6P2-cc16QY9PxEpZKy1jbUQPa0JiXM8hGAw1PEjKkcuOQV-hG5Rr0kmkPAbG9XAl90AcYsJe2kv0QRA'
+casting_assistant_token = os.getenv('CASTING_ASSISTANT_JWT')
+acting_director_token = os.getenv('ACTING_DIRECTOR_JWT')
+executive_producer_token = os.getenv('EXECUTIVE_PRODUCER_JWT')
 
 
 def get_header(role):
@@ -41,10 +40,10 @@ class CapstonTestCase(unittest.TestCase):
         self.app = create_app()
         self.client = self.app.test_client
         self.database_name = "actingagency"
-        # self.database_path = "postgresql://{}:{}@{}/{}".format(
-        #                      'postgres', '1234', 'localhost:5432',
-        #                       self.database_name)
-        self.database_path = 'postgresql://kvwxtgpckchsfh:8a8b32b7bbef5a242adadadaff33ff19cdd3629fb8842795210efb0c4d0da2ee@ec2-44-195-16-34.compute-1.amazonaws.com:5432/d8nbles1ii1qdg'
+        self.database_path = "postgresql://{}:{}@{}/{}".format(
+                             'postgres', '1234', 'localhost:5432',
+                              self.database_name)
+        # self.database_path = os.getenv('DATABASE_URL')
         setup_db(self.app, self.database_path)
 
         self.new_actor = {
