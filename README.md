@@ -54,14 +54,19 @@ This will install all of the required packages we selected within the `requireme
     One test for error behavior of each endpoint
     At least two tests of RBAC for each role
 
+## Starting the Server
 # API Reference
 ## Endpoints
+### Getting Started
 
-GET '/movies'
+    Base URL: Base URL: this app can be run locally and it is hosted also as a base URL using heroku (the deplyed application URL is : https://sarah-capstone-project.herokuapp.com). The backend app is hosted at the default, http://127.0.0.1:5000/, which is set as a proxy in the frontend configuration.
+
+### GET '/movies'
 - Fetches a list of movies.
 - Requires the 'get:movies' permission
 - Request Arguments: None
 - Returns: list of movies.
+```
 {
     "movies": [
         {
@@ -72,10 +77,10 @@ GET '/movies'
     ],
     "success": true
 }
+```
 
 
-
-GET '/actors'
+### GET '/actors'
 - Fetches a list of actors.
 - Requires the 'get:actors' permission
 - Request Arguments: None
@@ -94,7 +99,7 @@ GET '/actors'
 }
 
 
-POST '/actors'
+### POST '/actors'
 
 - Require the post:actors permission
 - Create a new row in the actors table
@@ -115,7 +120,7 @@ Here is a returned sample fromat
 }
 
 
-POST '/movies'
+### POST '/movies'
 
 - Require the post:movies permission
 - Create a new row in the movies table
@@ -134,7 +139,7 @@ Here is a result sample format:
   "success": true
 }
 
-PATCH '/actors/<id>'
+### PATCH '/actors/<id>'
 
 - Require the 'patch:actors' permission
 - Update an existing row in the actors table
@@ -154,7 +159,7 @@ He is a sample for a modified actor in a format:
   "success": true
 }
 
-PATCH '/movies/<id>'
+### PATCH '/movies/<id>'
 
 - Require the patch:movies permission
 - Update an existing row in the movies table
@@ -173,7 +178,7 @@ Here is an example of the modified movie in a format:
   "success": true
 }
 
-DELETE '/actors/<id>'
+### DELETE '/actors/<id>'
 
 - Require the delete:actors permission
 - Delete the corresponding row for <id> where <id> is the existing model id
@@ -185,7 +190,7 @@ return jsonify({
     "deleted": id
 })
 
-DELETE /movies/<movie_id>
+### DELETE /movies/<movie_id>
 
 - Require the delete:movies permission
 - Delete the corresponding row for <id> where <id> is the existing model id
