@@ -230,7 +230,7 @@ He is a sample for a modified actor in a format:
 - Contain the movie.format data representation returns status code 200 and json {"success": True, "movies": movie} where movie an array containing only the updated movie or appropriate status code indicating reason for failure
 
 Here is an example of the modified movie in a format:
-````
+```
 {
   "movies": [
     {
