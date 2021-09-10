@@ -68,9 +68,9 @@ This will install all of the required packages we selected within the `requireme
 ## Starting the Server locally
 1. To run this app locally, you need to clone or download the project from the Github repository: https://github.com/Sarah949/Capstone_Project.git
 
-'''bash
+```bash
 git clone https://github.com/Sarah949/Capstone_Project.git
-'''
+```
 2. Make sure you have python installed
 ```bash
 python
@@ -94,15 +94,15 @@ pip install -r requirements.txt
 ```
 
 6. Run the app using these commands
-'''bash
+```bash
 set  FLASK_APP=app.py
 flask run
-'''
+```
 
 ### To run test cases:
-'''bash
+```bash
 python test_app.py
-'''
+```
 # API Reference
 ## Endpoints
 ### Getting Started
@@ -119,11 +119,11 @@ Errors are returned as JSON in the following format:
 }
 The API will return the types of errors:
 
-400 – bad request
-404 – resource not found
-422 – unprocessable
-500 - internal server error
-401 - unauthorized
+- 400 – bad request
+- 404 – resource not found
+- 422 – unprocessable
+- 500 - internal server error
+- 401 - unauthorized
 ### GET '/movies'
 - Fetches a list of movies.
 - Requires the 'get:movies' permission
@@ -149,6 +149,7 @@ The API will return the types of errors:
 - Request Arguments: None
 - Returns: list of actors
 - Sample: 
+```
 {
     "actors": [
         {
@@ -160,7 +161,7 @@ The API will return the types of errors:
     ],
     "success": true
 }
-
+```
 
 ### POST '/actors'
 
@@ -169,7 +170,7 @@ The API will return the types of errors:
 - Contain the actor.get_actor data representation returns status code 200 and json {"success": True, "actors": actor} where actor an array containing only the newly created actor or appropriate status code indicating reason for failure
 
 Here is a returned sample fromat
-
+```
 {
   "actors": [
     {
@@ -181,7 +182,7 @@ Here is a returned sample fromat
   ],
   "success": true
 }
-
+```
 
 ### POST '/movies'
 
@@ -190,7 +191,7 @@ Here is a returned sample fromat
 - Contain the movie.get_movie data representation returns status code 200 and json {"success": True, "movies": movie} where movie an array containing only the newly created movie or appropriate status code indicating reason for failure.
 
 Here is a result sample format:
-
+```
 {
   "movies": [
     {
@@ -201,7 +202,7 @@ Here is a result sample format:
   ],
   "success": true
 }
-
+```
 ### PATCH '/actors/<id>'
 
 - Require the 'patch:actors' permission
@@ -209,7 +210,7 @@ Here is a result sample format:
 - Contain the actor.get_actor data representation returns status code 200 and json {"success": True, "actors": actor} where actor an array containing only the updated actor or appropriate status code indicating reason for failure
 
 He is a sample for a modified actor in a format:
-
+```
 {
   "actors": [
     {
@@ -221,7 +222,7 @@ He is a sample for a modified actor in a format:
   ],
   "success": true
 }
-
+```
 ### PATCH '/movies/<id>'
 
 - Require the patch:movies permission
@@ -229,7 +230,7 @@ He is a sample for a modified actor in a format:
 - Contain the movie.format data representation returns status code 200 and json {"success": True, "movies": movie} where movie an array containing only the updated movie or appropriate status code indicating reason for failure
 
 Here is an example of the modified movie in a format:
-
+````
 {
   "movies": [
     {
@@ -240,31 +241,31 @@ Here is an example of the modified movie in a format:
   ],
   "success": true
 }
-
+```
 ### DELETE '/actors/<id>'
 
 - Require the delete:actors permission
 - Delete the corresponding row for <id> where <id> is the existing model id
 - Respond with a 404 error if <id> is not found
 - Returns status code 200 and json {"success": True} where id is the id of the deleted record or appropriate status code indicating reason for failure
-
+```
 return jsonify({
     "success": True,
     "deleted": id
 })
-
+```
 ### DELETE /movies/<movie_id>
 
 - Require the delete:movies permission
 - Delete the corresponding row for <id> where <id> is the existing model id
 - Respond with a 404 error if <id> is not found
 - Returns status code 200 and json {"success": True, "deleted": id} where id is the id of the deleted record or appropriate status code indicating reason for failure
-
+```
 return jsonify({
     "success": True,
     "deleted": id
 })
-
+```
 ## Existing user roles
 ### Casting Assistant:
 - GET /actors (get:actors): can get all actors
