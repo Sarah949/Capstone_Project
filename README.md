@@ -107,7 +107,7 @@ python test_app.py
 ## Endpoints
 ### Getting Started
 
-    Base URL: Base URL: this app can be run locally and it is hosted also as a base URL using heroku (the deplyed application URL is : https://sarah-capstone-project.herokuapp.com). The backend app is hosted at the default, http://127.0.0.1:5000/, which is set as a proxy in the frontend configuration.
+*Base URL*: Base URL: this app can be run locally and it is hosted also as a base URL using heroku (the deplyed application URL is : https://sarah-capstone-project.herokuapp.com). The backend app is hosted at the default, http://127.0.0.1:5000/, which is set as a proxy in the frontend configuration.
 
 ### Error handling
 Errors are returned as JSON in the following format:
